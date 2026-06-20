@@ -51,6 +51,10 @@ honest negative, not a silent failure. To date, all negative:
 - **Running key from the K1–K3 plaintexts** (plus PALIMPSEST/ABSCISSA/KRYPTOS),
   every alignment, three cipher variants × two alphabets — best alignment hits
   only 5 of 24 crib positions (chance ≈ 0.9), i.e. noise (`running_key.py`).
+- **Misspellings & Morse strings as key material** (IQLUSION, UNDERGRUUND,
+  DESPARATLY; VIRTUALLY INVISIBLE, DIGETAL INTERPRETATU, SHADOW FORCES, LUCID
+  MEMORY, …), as running keys and as autokey primers — best 4 of 24, chance
+  level (`morse_misspelling.py`).
 
 These are real eliminations. They do **not** add up to a solution, and the
 tooling will not declare one unless a pipeline reproduces the exact ciphertext
