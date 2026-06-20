@@ -1,10 +1,33 @@
 # Kryptos K4 — exploratory cryptanalysis tooling
 
-K4 is the **publicly unsolved** final passage of Jim Sanborn's *Kryptos*
-sculpture (97 characters). This package does **not** claim a solution. It
-exists to test ideas against the small set of hard, public facts, so that a
-hypothesis either earns confidence or gets ruled out — rather than being
-asserted.
+K4 is the 97-character final passage of Jim Sanborn's *Kryptos* sculpture.
+
+## 2025 update: the message was *discovered*, the cipher was *not solved*
+
+In 2025 the K4 **plaintext** came to light — not by breaking the cipher, but
+when journalists Jarett Kobek and Richard Byrne found Sanborn's coding charts in
+the Smithsonian's Archives of American Art. Sanborn confirmed them. The
+reputable framing is **"discovered, not solved."**
+
+Recovered plaintext (letters only; `X` = word breaks):
+
+```
+THECOMPASSROSEISHEREXEASTNORTHEASTTHISISYOURPOSITIONXCOMMISSIONBERLINCLOCKWHICHISNORTHEASTOFHEREX
+```
+"THE COMPASS ROSE IS HERE / EAST NORTHEAST / THIS IS YOUR POSITION /
+COMMISSION BERLIN CLOCK WHICH IS NORTHEAST OF HERE"
+
+`kryptos/recovered.py` verifies this is exactly 97 characters and that all four
+Sanborn cribs sit at their confirmed positions (EAST 22–25, NORTHEAST 26–34,
+BERLIN 64–69, CLOCK 70–74) — strong internal corroboration. It then shows the
+implied keystream `ciphertext − plaintext` has **no short repeating period**
+under either alphabet: the cipher is a hand "masking" method that has **not**
+been reverse-engineered. So K4's *message* is known; its *cipher* is still open.
+
+Everything below is the exploratory toolkit, which still only calls a *cipher*
+solved if a forward pipeline reproduces the exact ciphertext. It documents
+which classical approaches are ruled out — and, with hindsight, *why* they had
+to fail (no simple key exists to recover).
 
 ## What's here
 
@@ -13,6 +36,7 @@ asserted.
 | `data.py` | Sourced facts only: the 97-char ciphertext, the confirmed Sanborn cribs, the KRYPTOS-keyed alphabet, English letter frequencies. |
 | `ciphers.py` | Round-trippable primitives: Vigenère, Beaufort, plaintext-autokey, columnar transposition — over either the standard or KRYPTOS-keyed alphabet. Run it directly for a self-test. |
 | `analysis.py` | Measurements: index of coincidence, χ² vs English, positional crib checking, order-agnostic substring search. |
+| `recovered.py` | The 2025 archive-recovered plaintext, its crib verification, and the implied-keystream analysis showing no repeating key. |
 | `solver.py` | Crib-driven keystream recovery: derives the key the cribs *force* under each cipher/alphabet and tests for a consistent short period. |
 | `hypothesis.py` | Records a submitted hypothesis verbatim and runs every check that can be run, reporting PASS/FAIL plainly. |
 | `../analyze.py` | Entry point. `python3 analyze.py`. |
