@@ -24,6 +24,16 @@ implied keystream `ciphertext − plaintext` has **no short repeating period**
 under either alphabet: the cipher is a hand "masking" method that has **not**
 been reverse-engineered. So K4's *message* is known; its *cipher* is still open.
 
+`kryptos/reverse_engineer.py` goes a step further: with the plaintext known, it
+tests the leading published model — that K4 is a linear-congruence transposition
+(`y = a + b·x mod 97`) of a periodic keyed Vigenère. Across all ~9,300
+transpositions and both ciphers/alphabets, the recovered key is at best ~42%
+periodic (numberworld's exact `y=77+38x`: ~33%), versus the ~100% a true
+repeating key would yield. So even with the answer in hand, that model does not
+reconstruct K4 — the cipher behaves like a hand "masking" system with no compact
+algorithmic description. (Scope: this tests the transpose-then-periodic-Vigenère
+family; other layered systems remain logically possible but unspecified.)
+
 Everything below is the exploratory toolkit, which still only calls a *cipher*
 solved if a forward pipeline reproduces the exact ciphertext. It documents
 which classical approaches are ruled out — and, with hindsight, *why* they had
@@ -37,6 +47,7 @@ to fail (no simple key exists to recover).
 | `ciphers.py` | Round-trippable primitives: Vigenère, Beaufort, plaintext-autokey, columnar transposition — over either the standard or KRYPTOS-keyed alphabet. Run it directly for a self-test. |
 | `analysis.py` | Measurements: index of coincidence, χ² vs English, positional crib checking, order-agnostic substring search. |
 | `recovered.py` | The 2025 archive-recovered plaintext, its crib verification, and the implied-keystream analysis showing no repeating key. |
+| `reverse_engineer.py` | Uses the known plaintext to test whether K4 is a linear-congruence transposition of a periodic Vigenère (numberworld's model). It isn't. |
 | `solver.py` | Crib-driven keystream recovery: derives the key the cribs *force* under each cipher/alphabet and tests for a consistent short period. |
 | `hypothesis.py` | Records a submitted hypothesis verbatim and runs every check that can be run, reporting PASS/FAIL plainly. |
 | `../analyze.py` | Entry point. `python3 analyze.py`. |
