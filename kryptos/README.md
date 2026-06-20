@@ -55,6 +55,12 @@ honest negative, not a silent failure. To date, all negative:
   DESPARATLY; VIRTUALLY INVISIBLE, DIGETAL INTERPRETATU, SHADOW FORCES, LUCID
   MEMORY, …), as running keys and as autokey primers — best 4 of 24, chance
   level (`morse_misspelling.py`).
+- **Berlin-Clock base-5 keying** including the submitted mod-5 seeds
+  `[12,2,4,3,16]` ×4 and natural Mengenlehreuhr lamp keystreams — best 5 of 24,
+  chance level (`berlin_clock.py`).
+- **K3-style keyed columnar transposition** (KRYPTOS / PALIMPSEST / ABSCISSA /
+  BERLINCLOCK / … column orders), as a layer under Vigenère and standalone — no
+  hidden period, best 4 of 24 standalone (`k3_transposition.py`).
 
 These are real eliminations. They do **not** add up to a solution, and the
 tooling will not declare one unless a pipeline reproduces the exact ciphertext
