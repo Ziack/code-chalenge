@@ -22,6 +22,19 @@ Chance baseline for a crib-hit score is ~0.9 / 24.
 | Misspellings / Morse as key | `morse_misspelling` | best 4/24 = chance | **closed** |
 | Berlin-Clock base-5 keying | `berlin_clock` | best 5/24 = chance | **closed** |
 | K1/K2 engine + sculpture keywords | `combined` | best 5/24 = chance | **closed** |
+| Quagmire III (KRYPTOS + keywords) | `quagmire` | best 4/24; BERLIN region ≠ BERLINCLOCK | **closed** |
+| Periodic cipher + 1–2 deliberate indels | `levenshtein` | +0 over baseline; no clean fit | **closed** |
+| Progressive key (linear/quadratic in position) | `progressive` | best 8/24; no clean fit | **closed** |
+| Segmented (per-section) keys | `segmented` | **no clean period < region length in either crib region** | **closed** |
+
+### The sharpest single result
+
+`segmented.py`: neither crib region (13 and 11 contiguous letters) admits *any*
+repeating period shorter than its own length, under any cipher/alphabet. The
+crib-forced keystream is **maximally aperiodic even locally** — there is no
+algorithmic compressibility to recover. This is the cleanest statement of why
+K4 resists every keystream-structure attack: the key behaves like
+one-time-pad / hand-masked material, not a generated sequence.
 
 ## The formal limit
 
