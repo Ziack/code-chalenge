@@ -26,6 +26,7 @@ Chance baseline for a crib-hit score is ~0.9 / 24.
 | Periodic cipher + 1–2 deliberate indels | `levenshtein` | +0 over baseline; no clean fit | **closed** |
 | Progressive key (linear/quadratic in position) | `progressive` | best 8/24; no clean fit | **closed** |
 | Segmented (per-section) keys | `segmented` | **no clean period < region length in either crib region** | **closed** |
+| Berlin-Clock mechanism as keystream | `berlin_mechanism` | best 8/24 over ~800K start/step/encoding configs | **closed** |
 
 ### The sharpest single result
 
