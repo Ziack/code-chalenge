@@ -13,13 +13,29 @@ asserted.
 | `data.py` | Sourced facts only: the 97-char ciphertext, the confirmed Sanborn cribs, the KRYPTOS-keyed alphabet, English letter frequencies. |
 | `ciphers.py` | Round-trippable primitives: Vigenère, Beaufort, plaintext-autokey, columnar transposition — over either the standard or KRYPTOS-keyed alphabet. Run it directly for a self-test. |
 | `analysis.py` | Measurements: index of coincidence, χ² vs English, positional crib checking, order-agnostic substring search. |
+| `solver.py` | Crib-driven keystream recovery: derives the key the cribs *force* under each cipher/alphabet and tests for a consistent short period. |
 | `hypothesis.py` | Records a submitted hypothesis verbatim and runs every check that can be run, reporting PASS/FAIL plainly. |
 | `../analyze.py` | Entry point. `python3 analyze.py`. |
 
 ```bash
 python3 -m kryptos.ciphers   # primitives self-test
+python3 -m kryptos.solver    # crib-driven keystream / periodicity analysis
 python3 analyze.py           # baseline + current hypothesis audit
 ```
+
+## My own line of attack (and its honest result)
+
+The cribs fix the plaintext at 24 positions. `solver.py` uses that to *derive*
+the keystream those positions force — no guessing — under Vigenère, Beaufort,
+and variant-Beaufort, over both the standard and KRYPTOS-keyed alphabets, then
+checks whether any short repeating period is self-consistent across both crib
+regions.
+
+Result: the forced key letters are noise, and **no period ≤ 12 survives** under
+any of the six assumptions. That is the expected, useful finding — it rules out
+the entire class of simple periodic polyalphabetic ciphers and matches the
+community's long-standing conclusion that K4's keying is non-periodic or
+masked. It narrows the search space; it does not solve K4 (nothing here does).
 
 ## The confirmed cribs (the facts any solution must satisfy)
 
