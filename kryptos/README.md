@@ -37,6 +37,22 @@ the entire class of simple periodic polyalphabetic ciphers and matches the
 community's long-standing conclusion that K4's keying is non-periodic or
 masked. It narrows the search space; it does not solve K4 (nothing here does).
 
+### Ruled out so far (`experiments.py`)
+
+Each attack states its success criterion before running, so a miss is an
+honest negative, not a silent failure. To date, all negative:
+
+- **Simple periodic Vigenère/Beaufort** (standard & KRYPTOS alphabets) — no
+  consistent short period (`solver.py`).
+- **Transposition-then-Vigenère** for every columnar width 2–48 — no hidden
+  short period emerges.
+- **Short-primer plaintext-autokey** (all 4-letter primers, both alphabets) —
+  no primer reproduces the cribs.
+
+These are real eliminations. They do **not** add up to a solution, and the
+tooling will not declare one unless a pipeline reproduces the exact ciphertext
+`OBKRUOXOG…`.
+
 ## The confirmed cribs (the facts any solution must satisfy)
 
 Sanborn released these as **positional** facts about the ciphertext
