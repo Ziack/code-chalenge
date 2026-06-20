@@ -53,6 +53,27 @@ These are real eliminations. They do **not** add up to a solution, and the
 tooling will not declare one unless a pipeline reproduces the exact ciphertext
 `OBKRUOXOG…`.
 
+### Forward test of the submitted width-12 pipeline (`pipeline.py`)
+
+`pipeline.py` implements one concrete, fully-documented reading of the submitted
+"Multi-Layered Fractional Transposition Autokey" (bifid over a KRYPTOS Polybius
+square with the asymmetric offset → plaintext-autokey → width-12 columnar
+transposition → the Levenshtein delete) and runs it *forward* on the proposed
+plaintext. It does **not** reproduce K4:
+
+- **Length is impossible by arithmetic.** The proposed message is 95 chars
+  (`active` 69 + `anchor` 26). Bifid/autokey/transposition preserve length and
+  the fault removes one, so the pipeline yields ≤ 95 chars — but K4 is 97. No
+  ordering of these steps can close a 3-char gap; only an unspecified
+  length-*increasing* step could, and none is listed.
+- **Content is at chance.** Across all 24 step orderings the best
+  position-match to the real ciphertext is ~8% — at/near the ~3.8% you'd expect
+  by chance — i.e. noise.
+
+This falsifies the concrete interpretation. Other readings of the ambiguous
+parameters exist, but the length arithmetic rules all of them out unless the
+plaintext or the step list changes.
+
 ## The confirmed cribs (the facts any solution must satisfy)
 
 Sanborn released these as **positional** facts about the ciphertext
